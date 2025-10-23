@@ -1,0 +1,383 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500&family=Playfair+Display:wght@600&display=swap');
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff8fa;
+  color: #3b2c35;
+  overflow-x: hidden;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* INTRO */
+#intro {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: #fdecef;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  font-family: 'Playfair Display', serif;
+  color: #e26ea2; z-index: 999;
+  font-size: 2em; text-align: center;
+  opacity: 1; transition: opacity 1.2s ease;
+}
+#intro.fade-out { opacity: 0; pointer-events: none; }
+
+#intro button {
+  margin-top: 25px;
+  background: #e26ea2;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  animation: fadeIn 1.5s ease;
+}
+
+#intro button:hover {
+  background: #ff8dc7;
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(10px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+/* MODE SWITCH */
+#mode-toggle {
+  position: fixed; top: 20px; right: 20px;
+  background: #fff0f4; color: #d8578c;
+  border: none; font-size: 0.9em; padding: 8px 15px;
+  border-radius: 20px; box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  cursor: pointer; z-index: 1000; transition: all 0.3s ease;
+}
+#mode-toggle:hover { background: #d8578c; color: #fff; }
+
+/* Hero */
+.hero {
+  position: relative; height: 100vh; text-align: center; overflow: hidden;
+}
+.hero-bg {
+  width: 100%; height: 100%; object-fit: cover;
+  position: absolute; top: 0; left: 0; z-index: -3;
+}
+.overlay {
+  background: rgba(255, 192, 203, 0.25);
+  backdrop-filter: blur(4px);
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -2;
+}
+
+/* Bokeh */
+.bokeh::before, .bokeh::after {
+  content: ""; position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(circle at 20% 30%, rgba(255,182,193,0.4), transparent 40%),
+              radial-gradient(circle at 80% 70%, rgba(255,182,193,0.3), transparent 50%);
+  filter: blur(50px); animation: moveBokeh 12s infinite alternate;
+}
+@keyframes moveBokeh { from {transform: translate(0,0);} to {transform: translate(20px, -20px);} }
+
+.hero-content { position: relative; top: 50%; transform: translateY(-50%); }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: 3em; color: #e26ea2; animation: fadeInDown 1.2s ease-in-out; }
+.subtitle { color: #5c435f; margin-top: 10px; }
+.quote { font-style: italic; margin-top: 15px; color: #6b4a57; }
+
+/* Our Story */
+.our-story {
+  padding: 70px 15%; text-align: center;
+}
+.our-story h2 {
+  color: #e26ea2; font-family: 'Playfair Display', serif; margin-bottom: 20px;
+}
+.our-story p { font-size: 1.1em; line-height: 1.8; color: #503646; }
+
+/* Gallery */
+.gallery {
+  padding: 60px 10%; background-color: #fdecef; text-align: center;
+}
+.gallery h2 { color: #d8578c; margin-bottom: 25px; font-family: 'Playfair Display', serif; }
+.photo-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px; justify-items: center;
+}
+.photo-grid img {
+  width: 100%; max-width: 320px; border-radius: 16px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.photo-grid img:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(255,105,180,0.3); }
+@media (max-width: 600px) {
+  .photo-grid { gap: 15px; }
+  .photo-grid img { max-width: 100%; }
+}
+
+/* Secret Message */
+.secret-message {
+  padding: 80px 15%;
+  background: #fff5f8;
+  text-align: center;
+}
+.secret-message h2 {
+  font-family: 'Playfair Display', serif;
+  color: #e26ea2;
+  margin-bottom: 20px;
+}
+#reveal-btn {
+  background: #e26ea2;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#reveal-btn:hover { background: #ff8dc7; transform: scale(1.05); }
+#message {
+  margin-top: 25px;
+  font-size: 1.1em;
+  color: #503646;
+  line-height: 1.8;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+#message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+.hidden { display: none; }
+
+/* 🌙 Text color fix biar sama kayak SS 1 (glow lembut) */
+body.sangu-mode #message,
+body.sangu-mode #letter {
+  color: #f5d9ff;
+  text-shadow: 0 0 10px rgba(220, 150, 255, 0.6),
+               0 0 25px rgba(160, 100, 255, 0.3);
+  line-height: 1.8;
+}
+
+body.sangu-mode #message strong,
+body.sangu-mode #letter strong {
+  color: #f3c8ff;
+  text-shadow: 0 0 15px rgba(240, 180, 255, 0.8);
+}
+
+/* Footer */
+footer {
+  text-align: center; padding: 30px;
+  color: #7b5870; background-color: #fff0f4;
+}
+.footer-text {
+  font-family: 'Playfair Display', serif; color: #e26ea2;
+  overflow: hidden; border-right: .15em solid #e26ea2;
+  white-space: nowrap; margin: 0 auto; letter-spacing: .1em;
+  animation: typing 4s steps(30,end), blink .8s infinite;
+}
+@keyframes typing { from { width: 0 } to { width: 100% } }
+@keyframes blink { 50% { border-color: transparent } }
+
+/* Floating hearts */
+.heart {
+  position: fixed; bottom: -10px; font-size: 24px; opacity: 0.7;
+  animation: rise 5s linear forwards;
+}
+@keyframes rise { 0% { transform: translateY(0) scale(1); opacity: 0.9; } 100% { transform: translateY(-100vh) scale(1.8); opacity: 0; } }
+
+/* NIGHT MODE (Sangu Mode) */
+body.sangu-mode {
+  background-color: #13091b; /* lebih pekat, tone malam elegan */
+  color: #f6eaff;
+  transition: background 0.6s ease, color 0.6s ease;
+}
+
+/* Section background dark */
+body.sangu-mode section,
+body.sangu-mode .gallery,
+body.sangu-mode .secret-message,
+body.sangu-mode .love-letter,
+body.sangu-mode .countdown,
+body.sangu-mode footer {
+  background: #1a0f23; /* seragam: dark purple lembut */
+  color: #f8eaff;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Hero Section */
+body.sangu-mode .hero {
+  background: linear-gradient(to bottom, #1a0f23, #13091b);
+}
+body.sangu-mode .overlay {
+  background: rgba(60, 20, 100, 0.35);
+  backdrop-filter: blur(6px);
+}
+
+/* Heading glow + readability */
+body.sangu-mode h1,
+body.sangu-mode h2,
+body.sangu-mode .footer-text {
+  color: #e0b3ff;
+  text-shadow: 0 0 10px rgba(220, 150, 255, 0.6),
+               0 0 25px rgba(160, 100, 255, 0.3);
+}
+
+body.sangu-mode p,
+body.sangu-mode .subtitle,
+body.sangu-mode .quote {
+  color: #f1dcff;
+  text-shadow: 0 0 8px rgba(255, 230, 255, 0.25);
+}
+
+/* Buttons */
+body.sangu-mode #mode-toggle {
+  background: rgba(240, 180, 255, 0.1);
+  color: #f3c8ff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 8px rgba(255, 150, 255, 0.3);
+}
+body.sangu-mode #mode-toggle:hover {
+  background: #dba6ff;
+  color: #1a0f23;
+}
+
+body.sangu-mode #reveal-btn,
+body.sangu-mode #open-letter {
+  background: #b97bf3;
+  color: #fff;
+  border: none;
+  box-shadow: 0 0 10px rgba(185, 123, 243, 0.6);
+}
+body.sangu-mode #reveal-btn:hover,
+body.sangu-mode #open-letter:hover {
+  background: #d9a6ff;
+  transform: scale(1.05);
+}
+
+/* Journey link */
+body.sangu-mode .journey-btn {
+  background: rgba(240, 200, 255, 0.15);
+  color: #f3c8ff;
+  border-radius: 25px;
+  padding: 10px 25px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(240, 150, 255, 0.3);
+  transition: all 0.3s ease;
+}
+body.sangu-mode .journey-btn:hover {
+  background: #dba6ff;
+  color: #1a0f23;
+}
+
+/* Hearts glow */
+body.sangu-mode .heart {
+  color: #ffb3ec;
+  filter: drop-shadow(0 0 6px rgba(255, 150, 230, 0.7));
+}
+
+/* Music player */
+body.sangu-mode .music-player {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f3c8ff;
+}
+body.sangu-mode .music-player span {
+  color: #f3c8ff;
+}
+body.sangu-mode .music-player button {
+  color: #e5b6ff;
+}
+
+/* Countdown */
+.countdown { text-align: center; padding: 60px 15%; background: #fff5f8; }
+#timer { font-size: 1.5em; color: #d8578c; font-family: 'Playfair Display', serif; margin-top: 15px; }
+
+/* Love Letter */
+.love-letter { text-align: center; padding: 70px 15%; background: #fdecef; }
+#open-letter {
+  background: #e26ea2; color: #fff; border: none; padding: 12px 25px;
+  border-radius: 30px; cursor: pointer; transition: all 0.3s ease;
+}
+#open-letter:hover { background: #ff8dc7; transform: scale(1.05); }
+#letter {
+  margin-top: 25px; max-width: 600px; margin-left: auto; margin-right: auto;
+  font-size: 1.1em; color: #503646; font-family: 'Dancing Script', cursive;
+  line-height: 1.8; white-space: pre-wrap;
+}
+
+/* Journey Page */
+.journey-page { background: #fff8fa; color: #3b2c35; }
+.journey { text-align: center; padding: 80px 10%; }
+.journey h1 { color: #e26ea2; font-family: 'Playfair Display', serif; margin-bottom: 40px; }
+.timeline { display: flex; flex-direction: column; gap: 40px; align-items: center; }
+.event {
+  background: #fff0f4; border-radius: 16px; padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1); max-width: 500px; transition: all 0.3s;
+}
+.event:hover { transform: scale(1.03); }
+.event img { width: 100%; border-radius: 12px; margin-top: 10px; }
+.event .date { color: #d8578c; font-weight: 500; }
+.back-btn { display: inline-block; margin-top: 40px; color: #e26ea2; text-decoration: none; font-weight: bold; }
+.back-btn:hover { text-decoration: underline; }
+
+/* 🌸 See Our Journey Button (Normal Mode) */
+.journey-btn {
+  display: inline-block;
+  margin: 30px auto;
+  background: #e26ea2;
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  box-shadow: 0 0 12px rgba(226, 110, 162, 0.4),
+              0 0 25px rgba(255, 153, 204, 0.2);
+  transition: all 0.3s ease;
+}
+.journey-btn:hover {
+  background: #ff8dc7;
+  color: #fff;
+  transform: scale(1.07);
+  box-shadow: 0 0 18px rgba(255, 145, 205, 0.6),
+              0 0 30px rgba(255, 170, 220, 0.3);
+}
+
+/* 🌙 See Our Journey Button (Sangu Mode) */
+body.sangu-mode .journey-btn {
+  background: rgba(240, 200, 255, 0.15);
+  color: #f3c8ff;
+  border-radius: 30px;
+  padding: 12px 30px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(240, 150, 255, 0.3),
+              0 0 20px rgba(230, 140, 255, 0.25);
+  transition: all 0.3s ease;
+}
+body.sangu-mode .journey-btn:hover {
+  background: #dba6ff;
+  color: #1a0f23;
+  transform: scale(1.07);
+  box-shadow: 0 0 18px rgba(240, 180, 255, 0.5),
+              0 0 35px rgba(255, 200, 255, 0.4);
+}
+
+/* Floating Music Player */
+.music-player {
+  position: fixed; bottom: 15px; right: 15px;
+  background: #fff0f4; border-radius: 25px; padding: 8px 20px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+  display: flex; align-items: center; gap: 10px; z-index: 1000;
+}
+.music-player button {
+  background: none; border: none; color: #d8578c; cursor: pointer; font-size: 1.1em;
+}
+.music-player span { color: #503646; font-size: 0.9em; }

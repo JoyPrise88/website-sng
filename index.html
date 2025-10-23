@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nae Aegi 💗</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/jpg" href="icons/favicon.jpg" />
+  <script src="https://kit.fontawesome.com/a2d042a4a1.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+</head>
+<body>
+
+  <button id="mode-toggle">🌙 Sangu Mode</button>
+
+  <div id="intro">
+    <h1>Nae Aegi 💗</h1>
+    <button id="start-btn">💖 Tap to Begin 💖</button>
+  </div>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="music/terlukis-indah.mp3" type="audio/mpeg" />
+  </audio>
+
+  <section class="hero">
+    <div class="overlay"></div>
+    <div class="bokeh"></div>
+    <img src="images/main.jpg" class="hero-bg" alt="For Gigi">
+    <div class="hero-content">
+      <h1>💕 Nae Aegi 💕</h1>
+      <p class="subtitle">Happy Monthversary — 25 October 2025</p>
+      <p class="quote">“To my favorite person in the world 💫”</p>
+    </div>
+  </section>
+
+  <section class="countdown">
+    <h2>⏰ Countdown to Our Next Monthversary 💞</h2>
+    <p id="timer"></p>
+  </section>
+
+  <section class="our-story">
+    <h2>Our Story 💞</h2>
+    <p>
+      From our first laugh to today, every moment with you is my favorite story 💗<br>
+      Thank you for always being my reason to smile, Gigi.
+    </p>
+  </section>
+
+  <section class="gallery">
+    <h2>Our Memories 📸</h2>
+    <div class="photo-grid">
+      <img src="images/1.jpg" alt="">
+      <img src="images/2.jpg" alt="">
+      <img src="images/3.jpg" alt="">
+      <img src="images/4.jpg" alt="">
+      <img src="images/5.jpg" alt="">
+      <img src="images/6.jpg" alt="">
+    </div>
+  </section>
+
+  <section class="secret-message">
+    <h2>💌 Secret Message 💌</h2>
+    <button id="reveal-btn">Tap to reveal 💖</button>
+    <p id="message" class="hidden">
+      Every moment with you feels like a dream come true.<br>
+      Thank you for being my home, my peace, and my favorite person. 💞<br>
+      I love you endlessly, Gigi 🫶🏻
+    </p>
+  </section>
+
+  <section class="love-letter">
+    <h2>💗 My Letter to You 💗</h2>
+    <button id="open-letter">Open My Letter 💌</button>
+    <div id="letter" class="hidden"></div>
+  </section>
+
+  <section class="journey-link">
+    <a href="journey.html" class="journey-btn">🌸 See Our Journey 🌸</a>
+  </section>
+
+  <footer>
+    <p class="footer-text">Love, Gigi 💗</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

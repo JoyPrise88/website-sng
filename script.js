@@ -49,7 +49,7 @@ revealBtn.addEventListener("click", () => {
 
 // Auto Monthversary text
 function updateMonthversaryDate() {
-  const startDate = new Date(2025, 7, 25);
+  const startDate = new Date(2025, 8, 25);
   const now = new Date();
   let monthsPassed = (now.getFullYear() - startDate.getFullYear()) * 12 + (now.getMonth() - startDate.getMonth()) + 1;
   const suffix = monthsPassed % 10 === 1 && monthsPassed !== 11 ? "st" :
@@ -126,3 +126,4 @@ playPauseBtn.addEventListener("click", () => {
   }
   isPlaying = !isPlaying;
 });
+
